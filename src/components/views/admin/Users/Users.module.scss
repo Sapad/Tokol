@@ -1,0 +1,50 @@
+.users {
+  &__table {
+    margin-top: 20px;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    th,
+    td {
+      text-align: left;
+      padding: 10px;
+    }
+    thead {
+      tr {
+        background-color: #f2f2f2;
+
+        th {
+          text-align: center;
+        }
+      }
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    &__action {
+      display: flex;
+      gap: 10px;
+      button {
+        border-radius: 10px;
+      }
+      &__edit {
+        background-color: #e9d53b;
+        padding: 15px;
+        color: #000;
+        border: none;
+        i {
+          font-size: 20px;
+        }
+      }
+      &__delete {
+        background-color: #ff6363;
+        padding: 15px;
+        border: none;
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
