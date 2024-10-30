@@ -3,13 +3,21 @@ import Input from "@/components/ui/Input";
 import Modal from "@/components/ui/Modal/Index";
 import Select from "@/components/ui/Select/Index";
 import userServices from "@/services/user";
+import { User } from "@/types/user.type";
 import { useSession } from "next-auth/react";
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 
-const ModalUpdateUser = (props: any) => {
-    const { updatedUser, setUpdateUser, setUsersData, setToster } = props;
+type PropsType = {
+    updatedUser: User | any;
+    setUpdateUser: Dispatch<SetStateAction<{}>>;
+    setUsersData: Dispatch<SetStateAction<User[]>>;
+    setToaster: Dispatch<SetStateAction<{}>>;
+    session: any;
+}
+
+const ModalUpdateUser = (props: PropsType) => {
+    const { updatedUser, setUpdateUser, setUsersData, setToaster, session } = props;
     const [isLoading, setIsLoading] = useState(false);
-    const session: any = useSession();
 
     const handleUpdateUser = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -27,10 +35,10 @@ const ModalUpdateUser = (props: any) => {
             setUpdateUser({});
             const { data } = await userServices.getAllUsers();
             setUsersData(data.data);
-            setToster({ message: 'User updated successfully', variant: 'success' });
+            setToaster({ message: 'User updated successfully', variant: 'success' });
         } else {
             setIsLoading(false);
-            setToster({ message: result.data.message, variant: 'error' });
+            setToaster({ message: result.data.message, variant: 'error' });
         }
 
     }
@@ -46,7 +54,7 @@ const ModalUpdateUser = (props: any) => {
                     { label: 'Member', value: 'member' },
                     { label: 'Admin', value: 'admin' },
                 ]} />
-                <Button type="submit">Edit</Button>
+                <Button type="submit">{isLoading ? 'Updating...' : 'Update User'}</Button>
             </form>
         </Modal>
     )

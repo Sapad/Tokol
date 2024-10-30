@@ -1,10 +1,10 @@
 import styles from './Toster.module.scss';
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 type PropsType = {
-    variants?: string
-    message?: string
-    setToster: any
+    variants?: string;
+    message?: string;
+    setToster: Dispatch<SetStateAction<{}>>;
 }
 
 const ToasterVariant: any = {
@@ -15,7 +15,7 @@ const ToasterVariant: any = {
         barColor: '#3f9242'
     },
     danger: {
-        title: 'Danger',
+        title: 'Error',
         icon: 'bx-check-circle',
         color: '#f39b9a',
         barColor: '#bb2525'
