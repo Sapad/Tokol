@@ -35,7 +35,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       </Head>
       <div className={lato.className}>
         {!disableNavbar.includes(pathname.split('/')[1]) && <Navbar />}
-        <Component {...pageProps} setToaster={setToster} />
+        <Component {...pageProps} setToster={setToster} />
         {Object.keys(toster).length > 0 && <Toster variants={toster.variant} message={toster.message} setToster={setToster} />}
       </div>
     </SessionProvider>

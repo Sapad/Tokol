@@ -5,11 +5,12 @@ import styles from './ModalDeleteUser.module.scss'
 import { useSession } from "next-auth/react";
 
 const ModalDeleteUser = (props: any) => {
-    const { deletedUser, setDeletedUser, setUsersData } = props;
+    const { deletedUser, setDeletedUser, setUsersData, setToster } = props;
     const session: any = useSession();
     const handleDelete = async () => {
         //memanggil data dari api serta session untuk delete dengan access token
         userServices.deleteUser(deletedUser.id, session.data?.accessToken);
+        setToster({ message: 'User deleted successfully', variant: 'success' });
         setDeletedUser({});
         const { data } = await userServices.getAllUsers();
         setUsersData(data.data);
