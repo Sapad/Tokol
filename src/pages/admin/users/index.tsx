@@ -2,7 +2,7 @@ import UsersAdminView from "@/components/views/admin/Users/Index";
 import userServices from "@/services/user";
 import { useEffect, useState } from "react";
 
-const UsersPage = () => {
+const UsersPage = ({ setToster }: any) => {
     const [users, setUsers] = useState([]);
     // bisa menggunakan useEffect (client side rendering) atau menggunakan server side rendering
     useEffect(() => {
@@ -14,7 +14,7 @@ const UsersPage = () => {
     }, []);
     return (
         <>
-            <UsersAdminView users={users} />
+            <UsersAdminView users={users} setToster={setToster} />
         </>
     )
 }
