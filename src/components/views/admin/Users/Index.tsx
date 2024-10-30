@@ -1,19 +1,23 @@
 import AdminLayout from "@/components/layouts/AdminLayouts";
 import Button from "@/components/ui/Button/Index";
 import styles from './Users.module.scss';
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import ModalUpdateUser from "./ModalUpdateUser/Index";
 import ModalDeleteUser from "./ModalDeleteUser/Index";
-
+import { User } from "@/types/user.type";
+import { useSession } from "next-auth/react";
 type propsTypes = {
-    users: any;
-    setToster: any;
+    users: User[];
+    setToaster: Dispatch<SetStateAction<{}>>;
 }
 const UsersAdminView = (props: propsTypes) => {
-    const { users, setToster } = props;
-    const [updateUser, setUpdateUser] = useState<any>({});
-    const [usersData, setUsersData] = useState([]);
-    const [deletedUser, setDeletedUser] = useState<any>({});
+    const { users, setToaster } = props;
+    const [updateUser, setUpdateUser] = useState<User[] | {}>({});
+    const [usersData, setUsersData] = useState<User[]>([]);
+    const [deletedUser, setDeletedUser] = useState<User[] | {}>({});
+
+    const session: any = useSession();
+
 
     useEffect(() => {
         setUsersData(users);
@@ -35,7 +39,7 @@ const UsersAdminView = (props: propsTypes) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {usersData.map((user: any, index: number) => (
+                            {usersData.map((user: User, index: number) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{user.fullname}</td>
@@ -64,7 +68,8 @@ const UsersAdminView = (props: propsTypes) => {
                 <ModalUpdateUser updatedUser={updateUser}
                     setUpdateUser={setUpdateUser}
                     setUsersData={setUsersData}
-                    setToster={setToster}
+                    setToaster={setToaster}
+                    session={session}
                 />
 
             )}
@@ -72,7 +77,8 @@ const UsersAdminView = (props: propsTypes) => {
                 <ModalDeleteUser deletedUser={deletedUser}
                     setDeletedUser={setDeletedUser}
                     setUsersData={setUsersData}
-                    setToster={setToster}
+                    setToaster={setToaster}
+                    session={session}
                 />
 
             )}

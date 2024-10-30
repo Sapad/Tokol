@@ -1,10 +1,15 @@
 import ProfileMemberView from "@/components/views/member/Profile";
 import userServices from "@/services/user";
+import { User } from "@/types/user.type";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-const MemberProfilePage = ({ setToaster }: any) => {
+import { SetStateAction, useEffect, useState, Dispatch } from "react";
+
+type Props = {
+    setToaster: Dispatch<SetStateAction<{}>>
+}
+const MemberProfilePage = ({ setToaster }: Props) => {
     // menampilkan profile user pada halaman member
-    const [profile, setProfile] = useState({});
+    const [profile, setProfile] = useState<User | any>({});
     const session: any = useSession();
     useEffect(() => {
         if (session.data?.accessToken && Object.keys(profile).length === 0) {
