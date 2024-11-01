@@ -4,7 +4,6 @@ import Modal from "@/components/ui/Modal/Index";
 import Select from "@/components/ui/Select/Index";
 import userServices from "@/services/user";
 import { User } from "@/types/user.type";
-import { useSession } from "next-auth/react";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 
 type PropsType = {

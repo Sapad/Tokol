@@ -2,7 +2,6 @@ import Button from "@/components/ui/Button/Index"
 import Modal from "@/components/ui/Modal/Index"
 import userServices from "@/services/user"
 import styles from './ModalDeleteUser.module.scss'
-import { useSession } from "next-auth/react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { User } from "@/types/user.type";
 
